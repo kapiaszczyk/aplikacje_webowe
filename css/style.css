@@ -1,10 +1,19 @@
 /* style.css */
-h1 {
-    color: #fff;
-    font-size: 48px;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
-    font-weight: 900;
-    margin-top: 40px;
+
+.container {
+    background-color: beige;
+}
+
+.inner-container {
+    width: 500px;
+    background-color: gray;
+    box-sizing: content-box;
+    border: 5px solid black;
+    margin: 5px;
+    padding: 20px;;
+}
+
+
+.inner-container#second {
+    box-sizing: border-box;    
 }
