@@ -1,0 +1,74 @@
+<!-- 
+    
+2. Pasek "przyczepiony" do górnej krawędzi okna przeglądarki (pasek jest zawsze widoczny, nawet po przewinięciu głównej zawartości strony).
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        /* style.css */
+        
+        body {
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgb(209, 209, 209);
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+
+            /* to force scroll without adding content */
+            height: 2000px; 
+
+        }
+
+        .inner-container {
+            padding: 10px;
+            margin-top: 50px;
+        }
+
+        .menu {
+            background-color: rgb(255, 255, 255);
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .menu li {
+            list-style: none;
+            display: inline-block;
+            height: 50px;
+        }
+
+    </style>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <div class="menu">
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+    </div>
+
+
+    <div class="container">
+        <div class="inner-container">
+
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, tenetur beatae iusto asperiores aperiam, earum laudantium excepturi natus, unde nesciunt ipsum soluta autem. Doloremque magni voluptatibus nulla, iste suscipit quo?
+
+        </div>
+    </div>
+</body>
+</html>
