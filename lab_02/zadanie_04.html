@@ -1,0 +1,64 @@
+<!-- 
+
+    4. Menu (zbudowane na bazie listy ul/li) dostosowujące wygląd do szerokości strony: 
+    dla szerszych ekranów kolejne pozycje są rozmieszczone poziomo, natomiast dla wąskich są umieszczane jeden nad drugim.
+    Zagadnienia: flex, media query
+
+ -->
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Home</title>
+     <!-- 
+         <link rel="stylesheet" type="text/css" href="css/style.css"> 
+     -->
+     <style>
+ 
+            /* style.css */
+            .menu {
+                background-color: rgb(218, 218, 218);
+                display: flex;
+                flex-wrap: wrap;
+                text-align: center;
+            }
+    
+            .menu > ul {
+                background: rgb(218, 218, 218);
+                margin: 5px;
+                flex: auto;
+                padding: 0;
+            }
+
+            .menu > ul > li {
+                display: inline-block;
+                padding: 10px;
+                background-color: rgb(134, 134, 134);
+            }
+
+            @media screen and (max-width: 600px) {
+
+                .menu > ul {
+                    flex-direction: column;
+                }
+
+                .menu > ul > li {
+                    display: block;
+                }
+                
+            }
+ 
+     </style>
+     <meta charset="utf-8">
+ </head>
+ <body>
+    <div class="menu">
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+        </ul>
+    </div>
+ </body>
+ </html>
