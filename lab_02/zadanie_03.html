@@ -1,0 +1,61 @@
+<!-- 
+
+    3. Widok kafelków (mający zastosowanie np. w galerii zdjęć, liście produktów w sklepie itp.). Kafelki (np. div) 
+    o ustalonych (jednakowych) wymiarach są rozmieszczane w taki sposób, by optymalnie wypełniały całą szerokość okna. 
+    W skrajnym przypadku (bardzo wąski ekran) kafelki będą umieszczone jeden pod drugim. 
+    Przy szerszych ekranach kilka kafelków mieści się obok siebie, a kolejne wylądują w następnym wierszu.
+
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <!-- 
+        <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    -->
+    <style>
+
+        /* style.css */
+
+        .container {
+            background-color: rgb(218, 218, 218);
+
+            /* The element behaves like a block-level element 
+            and lays out its content according to the flexbox model. */
+            display: flex; 
+
+            /* The flex items break into multiple lines. 
+            The cross-start is either equivalent to start or before depending 
+            flex-direction value and the cross-end is the opposite of the specified cross-start. */
+            flex-wrap: wrap;
+            justify-content: justify;
+        }
+
+        .container > div {
+            border: 1px solid black;
+            background: rgb(184, 184, 184);
+            margin: 5px;
+            
+            /* The item is sized according to its width and height properties, 
+            but grows to absorb any extra free space in the flex container, 
+            and shrinks to its minimum size to fit the container.  */
+            flex: auto; 
+            min-width: 100px;
+            height: 100px;
+        }
+
+    </style>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div class="container">
+        <div>Lorium ipsum 1</div>
+        <div>Lorium ipsum 2</div>
+        <div>Lorium ipsum 3</div>
+        <div>Lorium ipsum 4</div>
+        <div>Lorium ipsum 5</div>
+        <div>Lorium ipsum 6</div>
+    </div>
+</body>
+</html>
