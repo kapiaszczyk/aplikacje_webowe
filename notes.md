@@ -18,4 +18,5 @@
 ## Laboratoria 04
 - JavaScript
 - position - [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
+  - difference between relative, absolute, fixed, sticky
 - 
