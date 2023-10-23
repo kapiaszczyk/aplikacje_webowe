@@ -2,17 +2,47 @@
 <html>
 <head>
     <title>Home</title>
-    <!-- 
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
-    -->
     <style>
-        
+        .glasses {
+            background-image: url("assets/glasses.png");
+            z-index: 2;
+        }
+
+        .hair {
+            background-image: url("assets/hair.png");
+            z-index: 1;
+        }
+
+        .sim {
+            background-image: url("assets/sim.png");
+        }
+
+        .shirt {
+            background-image: url("assets/shirt.png");
+        }
+
+        .trousers {
+            background-image: url("assets/trousers.png");
+        }
+
+        .glasses, .hair, .sim, .shirt, .trousers {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
     </style>
     <meta charset="utf-8">
 </head>
 <body>
     <div class="container">
-        
+        <div class="glasses"></div>
+        <div class="hair"></div>
+        <div class="sim"></div>
+        <div class="shirt"></div>
+        <div class="trousers"></div>
     </div>
 </body>
 </html>
