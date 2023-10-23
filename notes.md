@@ -19,4 +19,5 @@
 - JavaScript
 - position - [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
   - difference between relative, absolute, fixed, sticky
-- 
+- HTML events - [documentation](https://developer.mozilla.org/en-US/docs/Web/Events) 
+- ggetElementById - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById?retiredLocale=pl)
