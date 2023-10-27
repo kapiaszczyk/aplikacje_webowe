@@ -50,13 +50,9 @@
     <script>
 
     function hide(elementId) {
-    var element = document.getElementById(elementId);
-    if (element.style.display === "none") {
-        element.style.display = "block"; // Show the element
-    } else {
-        element.style.display = "none"; // Hide the element
+        var element = document.getElementById(elementId);
+        element.style.display === "none" ? element.style.display = "block" : element.style.display = "none"; 
     }
-}
 
     </script>
     <meta charset="utf-8">
