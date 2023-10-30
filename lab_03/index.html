@@ -55,8 +55,8 @@
     </style>
     <script>
 
-    function hide(elementId) {
-        var element = document.getElementById(elementId);
+    function hide() {
+        var element = document.getElementById(event.target.id);
         element.style.display === "none" ? element.style.display = "block" : element.style.display = "none"; 
     }
 
@@ -74,11 +74,11 @@
 
     <div class="menu">
         <ul>
-            <li><button onclick="hide('hair')">Hair</button></li>
-            <li><button onclick="hide('glasses')">Glasses</button></li>
-            <li><button onclick="hide('trousers')">Trousers</button></li>
-            <li><button onclick="hide('shirt')">Shirt</button></li>
-            <li><button onclick="hide('sim')">Sim</button></li>
+            <li><button onclick="hide()" id="hair">Hair</button></li>
+            <li><button onclick="hide()" id="glasses">Glasses</button></li>
+            <li><button onclick="hide()" id="trousers">Trousers</button></li>
+            <li><button onclick="hide()" id="shirt">Shirt</button></li>
+            <li><button onclick="hide()" id="sim">Sim</button></li>
         </ul>
     </div>
 </body>
