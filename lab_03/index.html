@@ -3,23 +3,23 @@
 <head>
     <title>Home</title>
     <style>
-        #glasses {
+        #glasses-img {
             background-image: url("assets/glasses.png");
         }
 
-        #hair {
+        #hair-img {
             background-image: url("assets/hair.png");
         }
 
-        #sim {
+        #sim-img {
             background-image: url("assets/sim.png");
         }
 
-        #shirt {
+        #shirt-img {
             background-image: url("assets/shirt.png");
         }
 
-        #trousers {
+        #trousers-img {
             background-image: url("assets/trousers.png");
         }
 
@@ -66,8 +66,15 @@
     </style>
     <script>
 
+    window.addEventListener("DOMContentLoaded", () => {
+        inputs = ["sim", "shirt", "trousers", "glasses", "hair"];
+        for(const input of inputs) {
+            document.getElementById(input).addEventListener("click", hide);
+        }
+    });
+
     function hide() {
-        var element = document.getElementById(event.target.id);
+        var element = document.getElementById(event.target.id + "-img");
         element.style.display === "none" ? element.style.display = "block" : element.style.display = "none"; 
     }
 
@@ -76,20 +83,20 @@
 </head>
 <body>
     <div class="container">
-        <div id="sim"></div>
-        <div id="shirt"></div>
-        <div id="trousers"></div>
-        <div id="glasses"></div>
-        <div id="hair"></div>
+        <div id="sim-img"></div>
+        <div id="shirt-img"></div>
+        <div id="trousers-img"></div>
+        <div id="glasses-img"></div>
+        <div id="hair-img"></div>
     </div>
 
     <div class="menu">
         <ul>
-            <li><button onclick="hide()" id="hair">Hair</button></li>
-            <li><button onclick="hide()" id="glasses">Glasses</button></li>
-            <li><button onclick="hide()" id="trousers">Trousers</button></li>
-            <li><button onclick="hide()" id="shirt">Shirt</button></li>
-            <li><button onclick="hide()" id="sim">Sim</button></li>
+            <li><button id="hair">Hair</button></li>
+            <li><button id="glasses">Glasses</button></li>
+            <li><button id="trousers">Trousers</button></li>
+            <li><button id="shirt">Shirt</button></li>
+            <li><button id="sim">Sim</button></li>
         </ul>
     </div>
 </body>
