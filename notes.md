@@ -20,4 +20,12 @@
 - position - [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
   - difference between relative, absolute, fixed, sticky
 - HTML events - [documentation](https://developer.mozilla.org/en-US/docs/Web/Events) 
-- ggetElementById - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById?retiredLocale=pl)
+- getElementById - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById?retiredLocale=pl)
+
+## Laboratoria 05
+- input - [documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)
+- onclick - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick)
+- this keyword - [documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+- :hover - [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/:hover)
+- decoupling HTML, CSS and JS - [further reading](https://philipwalton.com/articles/decoupling-html-css-and-javascript/)
+- add event listener - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
