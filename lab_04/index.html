@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="main.js"></script>
+
+    <script>
+
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log("Loaded!");
+            document.getElementById("button_catch").addEventListener("click", catchClick);
+            document.getElementById("button_start").addEventListener("click", startClick);
+            document.getElementById("button_stop").addEventListener("click", stopClick);
+        });
+
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div>Goal: <div class="js-generated" id="goal_word"></div> </div>
+        <div>Current word: <div class="js-generated"  id="current_word"></div></div>
+        <div>Round: <div class="js-generated"  id="round"></div></div>
+        <div>Score: <div class="js-generated"  id="score"></div></div>
+        
+        <button id="button_start">Start</button>
+        <button id="button_catch">Catch!</button>
+        <button id="button_stop">Stop</button>
+
+    </div>
+    
+</body>
+</html>
