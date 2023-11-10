@@ -10,14 +10,51 @@ body {
     height: 100vh;
     background-color: rgb(13, 13, 13);
     text-align: center;
+    position: relative;
+}
+
+.inner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(25, 25, 25);
+    padding: 20px;
 }
 
 .container > div {
     font-family: 'Open Sans', sans-serif;
-    color: #d0d0d0;
+    color: #bcbcbc;
+    font-size: 1.25em;
+    font-weight: 600;
 }
 
 .js-generated {
     display: inline-block;
     color: #759ad1;
+    font-weight: bold;
+}
+
+.button-container {
+    margin-top: 1em;
+}
+
+button {
+    background-color: #274674;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0.5em;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.75em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+}
+
+button:hover {
+    background-color: #1c365d;
 }
