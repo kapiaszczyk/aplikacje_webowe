@@ -4,7 +4,7 @@ const wordList = [  "discount", "roof", "beat", "hostile", "illusion",
                     "closed", "heavy", "book", "screw", "diver",
                     "coin", "navy", "silk", "cow", "evolution"];
 
-const MAX_ROUNDS = 5;
+// const MAX_ROUNDS = 5;
 const MAX_POINTS = 10;
 
 // Variables
@@ -12,40 +12,63 @@ const MAX_POINTS = 10;
 let wordGoal = "";
 let wordGuess = "";
 let points = 0;
-let curentRound = 0;
+// let round = 0;
+let stopClickedFlag = false;
 
-// Functions
+// Click handlers
 
-function catchClick() {
+function catchClicked() {
     console.log("Catch clicked!");
+
+    // get the current word and the goal word
+    wordGuess = document.getElementById("current_word").innerHTML;
+    wordGoal = document.getElementById("goal_word").innerHTML;
+
+    // and compare them
+
+    if (compareWords()) {
+        console.log("Words match!");
+        addPoints();
+    } else {
+        console.log("Words don't match!");
+        removePoints();
+    }
 }
 
-function startClick() {
+function startClicked() {
     console.log("Start clicked!");
 
     // start the game
     startGame();
+
 }
 
-function stopClick() {
+function stopClicked() {
     console.log("Stop clicked!");
+
+    // stop the game
+    stopGame();
+
+    stopClickedFlag = true;
 }
 
+// Game logic functions
+
+function resetGame() {
+    console.log("Game reset");
+    wordGoal = "";
+    wordGuess = "";
+    points = 0;
+    round = 0;
+    stopClickedFlag = false;
+
+    console.log("Resetting words");
+    document.getElementById("goal_word").innerHTML = "";
+    document.getElementById("current_word").innerHTML = "";
+}
 
 function getRandomWord() {
     return wordList[Math.floor(Math.random() * wordList.length)];
-}
-
-function getGoalWord() {
-    wordGoal = getRandomWord();
-    return wordGoal;
-}
-
-function tick() {
-    // sends a tick every half second
-    // which prompts a different random word to be displayed
-
-    setInterval(displayRandomWord, 500);
 }
 
 function displayRandomWord() {
@@ -54,51 +77,48 @@ function displayRandomWord() {
 } 
 
 function displayGoalWord() {
+    wordGoal= getRandomWord();
     document.getElementById("goal_word").innerHTML = wordGoal;
 }
 
+function displayPoints() {
+    document.getElementById("score").innerHTML = getPoints();
+}
+
 function addPoints() {
+    console.log("Points added");
     points++;
 }
 
 function removePoints() {
+    console.log("Points removed");
     points--;
 }
 
 function compareWords() {
+    console.log("Comparing words");
     return wordGuess === wordGoal;
 }
 
 function isEndCondition() {
-    return checkPoints() || checkRounds();
+    return checkPoints();
 }
 
 function checkPoints() {
-    return points === MAX_POINTS;
-}
-
-function checkRounds() {
-    return curentRound === MAX_ROUNDS;
+    return points >= MAX_POINTS;
 }
 
 function getPoints() {
     return points;
 }
 
-function getRound() {
-    return curentRound;
-}
 
 function stopGame() {
+    console.log("Game stopped");
 
-}
-
-function resetGame() {
-    console.log("Game reset");
-    wordGoal = "";
-    wordGuess = "";
-    points = 0;
-    curentRound = 0;
+    // clear setInterval
+    clearInterval(displayRandomWord);
+    resetGame();
 }
 
 function startGame() {
@@ -109,8 +129,28 @@ function startGame() {
     resetGame();
 
     // get the goal word
-
-    getGoalWord();
     displayGoalWord();
+
+    // display score
+    document.getElementById("score").innerHTML = getPoints();
+
+    // untill the end condition is met
+    // display a random word
+
+    let interval = setInterval(function() {
+        displayRandomWord();
+        displayPoints();
+        if (isEndCondition() || stopClickedFlag) {
+            clearInterval(interval);
+        }
+    }, 1000);
+
+    // while (!isEndCondition()) {
+    //     randomWordTick();
+    // }
+
+    // for (let i = 0; i < MAX_POINTS; i++) {
+    //     addPoints();
+    // }
 
 }
