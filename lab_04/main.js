@@ -1,18 +1,15 @@
 // Const
-
 const wordList = [  "discount", "roof", "beat", "hostile", "illusion", 
                     "closed", "heavy", "book", "screw", "diver",
                     "coin", "navy", "silk", "cow", "evolution"];
 
 // const MAX_ROUNDS = 5;
-const MAX_POINTS = 10;
+const MAX_POINTS = 2;
 
 // Variables
-
 let wordGoal = "";
 let wordGuess = "";
 let points = 0;
-// let round = 0;
 let stopClickedFlag = false;
 
 // Click handlers
@@ -25,7 +22,6 @@ function catchClicked() {
     wordGoal = document.getElementById("goal_word").innerHTML;
 
     // and compare them
-
     if (compareWords()) {
         console.log("Words match!");
         addPoints();
@@ -40,7 +36,6 @@ function startClicked() {
 
     // start the game
     startGame();
-
 }
 
 function stopClicked() {
@@ -48,7 +43,6 @@ function stopClicked() {
 
     // stop the game
     stopGame();
-
     stopClickedFlag = true;
 }
 
@@ -61,10 +55,11 @@ function resetGame() {
     points = 0;
     round = 0;
     stopClickedFlag = false;
-
     console.log("Resetting words");
     document.getElementById("goal_word").innerHTML = "";
     document.getElementById("current_word").innerHTML = "";
+    document.getElementById("score").innerHTML = "";
+    document.getElementById("end-game").innerHTML = "";
 }
 
 function getRandomWord() {
@@ -138,19 +133,31 @@ function startGame() {
     // display a random word
 
     let interval = setInterval(function() {
-        displayRandomWord();
-        displayPoints();
         if (isEndCondition() || stopClickedFlag) {
+            console.log("Clearing interval");
             clearInterval(interval);
+        } else {
+            displayRandomWord();
         }
     }, 1000);
 
-    // while (!isEndCondition()) {
-    //     randomWordTick();
-    // }
+    let interval_points = setInterval(function() {
+        if (isEndCondition() || stopClickedFlag) {
+            console.log("Clearing interval_points");
+            clearInterval(interval_points);
+        }
+        displayPoints();
+    }, 100);
 
-    // for (let i = 0; i < MAX_POINTS; i++) {
-    //     addPoints();
-    // }
+    let interval_end = setInterval(function() {
+        if (isEndCondition() || stopClickedFlag) {
+            console.log("Clearing interval_end");
+            clearInterval(interval_end);
+            console.log("Game over");
+            // stopGame();
+            document.getElementById("end-game").innerHTML = "Game over!";
+        }
+        // checkEndCondition();
+    }, 100);
 
 }
