@@ -1,10 +1,11 @@
 // Const
-const wordList = [  "discount", "roof", "beat", "hostile", "illusion", 
-                    "closed", "heavy", "book", "screw", "diver",
-                    "coin", "navy", "silk", "cow", "evolution"];
+// const wordList = [  "discount", "roof", "beat", "hostile", "illusion", 
+//                     "closed", "heavy", "book", "screw", "diver",
+//                     "coin", "navy", "silk", "cow", "evolution"];
 
-// const MAX_ROUNDS = 5;
-const MAX_POINTS = 2;
+const wordList = [  "discount", "roof"];
+const MAX_POINTS = 5;
+const WORD_INTERVAL = 1000;
 
 // Variables
 let wordGoal = "";
@@ -12,9 +13,37 @@ let wordGuess = "";
 let points = 0;
 let stopClickedFlag = false;
 
+// Intervals
+let randomWordInterval;
+let pointsInterval;
+let gameOverInterval;
+
 // Click handlers
 
-function catchClicked() {
+function startGame() {
+
+    // reset the game
+    resetGame();
+
+    console.log("Game started");
+
+    // get the goal word
+    displayGoalWord();
+
+    // display score
+    displayPoints();
+
+    setRandomWordInterval();
+    setGameOverInterval();
+}   
+
+function catchWord() {
+
+    if (shouldGameStop()) {
+        console.log("Game stopped, can't catch words!");
+        return;
+    }
+
     console.log("Catch clicked!");
 
     // get the current word and the goal word
@@ -31,18 +60,15 @@ function catchClicked() {
     }
 }
 
-function startClicked() {
-    console.log("Start clicked!");
-
-    // start the game
-    startGame();
-}
-
-function stopClicked() {
+function stopGame() {
     console.log("Stop clicked!");
 
-    // stop the game
-    stopGame();
+    // reset the intervals
+    clearInterval(randomWordInterval);
+    clearInterval(pointsInterval);
+    clearInterval(gameOverInterval);
+
+    document.getElementById("end-game").innerHTML = "Game stopped!";
     stopClickedFlag = true;
 }
 
@@ -53,12 +79,12 @@ function resetGame() {
     wordGoal = "";
     wordGuess = "";
     points = 0;
-    round = 0;
     stopClickedFlag = false;
+
     console.log("Resetting words");
-    document.getElementById("goal_word").innerHTML = "";
-    document.getElementById("current_word").innerHTML = "";
-    document.getElementById("score").innerHTML = "";
+    displayGoalWord();
+    displayRandomWord();
+    displayPoints();
     document.getElementById("end-game").innerHTML = "";
 }
 
@@ -83,11 +109,13 @@ function displayPoints() {
 function addPoints() {
     console.log("Points added");
     points++;
+    displayPoints();
 }
 
 function removePoints() {
     console.log("Points removed");
     points--;
+    displayPoints();
 }
 
 function compareWords() {
@@ -95,69 +123,31 @@ function compareWords() {
     return wordGuess === wordGoal;
 }
 
-function isEndCondition() {
-    return checkPoints();
-}
-
-function checkPoints() {
-    return points >= MAX_POINTS;
+function shouldGameStop() {
+    return (points >= MAX_POINTS) || stopClickedFlag;
 }
 
 function getPoints() {
     return points;
 }
 
-
-function stopGame() {
-    console.log("Game stopped");
-
-    // clear setInterval
-    clearInterval(displayRandomWord);
-    resetGame();
+function setRandomWordInterval() {
+    randomWordInterval = setInterval(function() {
+        if (!shouldStopInterval()) {
+        console.log("Random word tick: ");
+        displayRandomWord();
+        }
+    }, WORD_INTERVAL);
 }
 
-function startGame() {
-
-    console.log("Game started");
-
-    // reset the game
-    resetGame();
-
-    // get the goal word
-    displayGoalWord();
-
-    // display score
-    document.getElementById("score").innerHTML = getPoints();
-
-    // untill the end condition is met
-    // display a random word
-
-    let interval = setInterval(function() {
-        if (isEndCondition() || stopClickedFlag) {
-            console.log("Clearing interval");
-            clearInterval(interval);
-        } else {
-            displayRandomWord();
-        }
-    }, 1000);
-
-    let interval_points = setInterval(function() {
-        if (isEndCondition() || stopClickedFlag) {
-            console.log("Clearing interval_points");
-            clearInterval(interval_points);
-        }
-        displayPoints();
-    }, 100);
-
-    let interval_end = setInterval(function() {
-        if (isEndCondition() || stopClickedFlag) {
+function setGameOverInterval() {
+    gameOverInterval = setInterval(function() {
+        if (shouldGameStop()) {
             console.log("Clearing interval_end");
-            clearInterval(interval_end);
-            console.log("Game over");
-            // stopGame();
+            clearInterval(randomWordInterval);
+            clearInterval(gameOverInterval);
+            console.log("Game over");            
             document.getElementById("end-game").innerHTML = "Game over!";
         }
-        // checkEndCondition();
     }, 100);
-
 }
