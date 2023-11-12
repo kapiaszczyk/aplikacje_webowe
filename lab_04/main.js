@@ -1,3 +1,5 @@
+// Github repo: https://github.com/kapiaszczyk/aplikacje_webowe/tree/main/lab_04
+
 const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion", 
                     "closed", "heavy", "book", "screw", "diver",
                     "coin", "navy", "silk", "cow", "evolution"];
