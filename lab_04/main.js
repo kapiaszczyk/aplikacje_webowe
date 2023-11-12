@@ -39,13 +39,7 @@ class Game {
         console.log("Game constructor called")
 
         // Game variables
-        this.wordGoal = "";
-        this.wordGuess = "";
-        this.currentWord = "";
-        this.points = 0;
-        this.stopClickedFlag = false;
-        this.wordGenerator = new wordGenerator();
-        this.wordPresenter = new wordPresenter();
+        this.initailizeGame();
 
         // Intervals
         this.randomWordInterval;
@@ -53,8 +47,7 @@ class Game {
         this.gameOverInterval;
     }
 
-    resetGame() {
-        console.log("Game reset");
+    initailizeGame() {
         this.wordGoal = "";
         this.wordGuess = "";
         this.currentWord = "";
@@ -62,6 +55,10 @@ class Game {
         this.stopClickedFlag = false;
         this.wordGenerator = new wordGenerator();
         this.wordPresenter = new wordPresenter();
+    }
+
+    resetGame() {
+        this.initailizeGame();
 
         console.log("Resetting words");
         this.wordPresenter.clearDisplayedWord("goal_word");
@@ -70,9 +67,7 @@ class Game {
         this.wordPresenter.clearDisplayedWord("end-game");
 
         console.log("Resetting intervals");
-        clearInterval(this.randomWordInterval);
-        clearInterval(this.pointsInterval);
-        clearInterval(this.gameOverInterval);
+        this.clearIntervals();
     }
 
     setWordGoal(word) {
@@ -89,6 +84,12 @@ class Game {
 
     getCurrentWord() {
         return this.currentWord;
+    }
+
+    clearIntervals() {
+        clearInterval(this.randomWordInterval);
+        clearInterval(this.pointsInterval);
+        clearInterval(this.gameOverInterval);
     }
 
     startGame() {
@@ -114,11 +115,9 @@ class Game {
         console.log("Stopping game");
 
         console.log("Clearing intervals");
-        clearInterval(this.randomWordInterval);
-        clearInterval(this.pointsInterval);
-        clearInterval(this.gameOverInterval);
+        this.clearIntervals();
 
-        if (this.stopClickedFlag) {
+        if (this.stopClickedFlag && !this.shouldGameStop()) {
             this.wordPresenter.displayWord("Game stopped!", "end-game");
         } else {
             if (this.points >= MAX_POINTS) {
@@ -191,8 +190,7 @@ class Game {
         this.gameOverInterval = setInterval(function() {
             if (this.shouldGameStop()) {
                 console.log("Game over");
-                clearInterval(this.randomWordInterval);            
-                this.wordPresenter.displayWord("Game over!", "end-game");
+                this.stopGame();
             }
         }, 100);
     }
