@@ -34,7 +34,6 @@ class wordGenerator {
 
 class Game {
 
-    // Constructor
     constructor() {
 
         console.log("Game constructor called")
@@ -54,7 +53,6 @@ class Game {
         this.gameOverInterval;
     }
 
-    // Reset the game
     resetGame() {
         console.log("Game reset");
         this.wordGoal = "";
@@ -115,14 +113,10 @@ class Game {
 
         console.log("Stopping game");
 
-        // reset the intervals
         console.log("Clearing intervals");
         clearInterval(this.randomWordInterval);
         clearInterval(this.pointsInterval);
         clearInterval(this.gameOverInterval);
-
-        // if flag set to stop, display game stopped
-        // else display game over or game won
 
         if (this.stopClickedFlag) {
             this.wordPresenter.displayWord("Game stopped!", "end-game");
@@ -145,7 +139,6 @@ class Game {
             return;
         }
     
-        // and compare them
         if (this.compareWords()) {
             console.log("Words match!");
             this.addPoints();
@@ -196,7 +189,7 @@ class Game {
     setRandomWordInterval() {
         console.log("Setting random word interval");
     
-        this.randomWordInterval = setInterval(() => { // Change to arrow function
+        this.randomWordInterval = setInterval(() => {
     
             console.log("Inside random word interval");
     
