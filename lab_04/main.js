@@ -9,11 +9,17 @@ const WORD_INTERVAL = 1000;
 class wordDisplayer {
 
     displayWord(word, destinationID) {
-        document.getElementById(destinationID).innerHTML = word;
+        const element = document.getElementById(destinationID);
+        if (element) {
+            element.textContent = word;
+        }
     }
 
     clearDisplayedWord(destinationID) {
-        document.getElementById(destinationID).innerHTML = "";
+        const element = document.getElementById(destinationID);
+        if (element) {
+            element.textContent = "";
+        }
     }
     
 }
