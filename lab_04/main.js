@@ -147,23 +147,6 @@ class Game {
             this.removePoints();
         }
     }
-
-    displayRandomWord(word) {
-        console.log("Displaying current guess word");
-        this.setCurrentWord(word);
-        console.log("Current word: " + this.getCurrentWord());
-        this.wordPresenter.displayWord(this.getCurrentWord(), "current_word");
-    } 
-    
-    displayGoalWord(word) {
-        this.wordGoal = word;
-        wordPresenter.displayWord(this.wordGoal, "goal_word");
-        console.log("Displaying goal word: " + this.wordGoal);
-    }
-    
-    displayPoints() {
-        this.wordPresenter.displayWord(this.points, "score");
-    }
     
     addPoints() {
         console.log("Points added");
