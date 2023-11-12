@@ -1,10 +1,8 @@
-// Const
-// const wordList = [  "discount", "roof", "beat", "hostile", "illusion", 
-//                     "closed", "heavy", "book", "screw", "diver",
-//                     "coin", "navy", "silk", "cow", "evolution"];
-const wordList = [  "discount", "roof", "beat"];
+const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion", 
+                    "closed", "heavy", "book", "screw", "diver",
+                    "coin", "navy", "silk", "cow", "evolution"];
 
-const MAX_POINTS = 3;
+const MAX_POINTS = 5;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
 
@@ -23,9 +21,7 @@ class wordPresenter {
 class wordGenerator {
     
         constructor() {
-            this.wordList = [  "discount", "roof", "beat", "hostile", "illusion", 
-                                "closed", "heavy", "book", "screw", "diver",
-                                "coin", "navy", "silk", "cow", "evolution"];
+            this.wordList = WORD_LIST;
         }
     
         getRandomWord() {
@@ -33,7 +29,6 @@ class wordGenerator {
             console.log("Random word: " + this.wordList[index]);
             return this.wordList[index];
         }
-    
     
 }
 
