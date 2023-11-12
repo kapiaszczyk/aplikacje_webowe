@@ -6,7 +6,7 @@ const MAX_POINTS = 5;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
 
-class wordPresenter {
+class wordDisplayer {
 
     displayWord(word, destinationID) {
         document.getElementById(destinationID).innerHTML = word;
@@ -54,17 +54,17 @@ class Game {
         this.points = 0;
         this.stopClickedFlag = false;
         this.wordGenerator = new wordGenerator();
-        this.wordPresenter = new wordPresenter();
+        this.wordDisplayer = new wordDisplayer();
     }
 
     resetGame() {
         this.initailizeGame();
 
         console.log("Resetting words");
-        this.wordPresenter.clearDisplayedWord("goal_word");
-        this.wordPresenter.clearDisplayedWord("current_word");
-        this.wordPresenter.clearDisplayedWord("score");
-        this.wordPresenter.clearDisplayedWord("end-game");
+        this.wordDisplayer.clearDisplayedWord("goal_word");
+        this.wordDisplayer.clearDisplayedWord("current_word");
+        this.wordDisplayer.clearDisplayedWord("score");
+        this.wordDisplayer.clearDisplayedWord("end-game");
 
         console.log("Resetting intervals");
         this.clearIntervals();
@@ -99,11 +99,11 @@ class Game {
         // get the goal word
         console.log("Getting goal word");
         this.setWordGoal(this.wordGenerator.getRandomWord());
-        this.wordPresenter.displayWord(this.getWordGoal(), "goal_word");
+        this.wordDisplayer.displayWord(this.getWordGoal(), "goal_word");
     
         // display score
         console.log("Displaying score");
-        this.wordPresenter.displayWord(this.points, "score");
+        this.wordDisplayer.displayWord(this.points, "score");
 
         this.setRandomWordInterval();
         this.setGameOverInterval();
@@ -118,13 +118,13 @@ class Game {
         this.clearIntervals();
 
         if (this.stopClickedFlag && !this.shouldGameStop()) {
-            this.wordPresenter.displayWord("Game stopped!", "end-game");
+            this.wordDisplayer.displayWord("Game stopped!", "end-game");
         } else {
             if (this.points >= MAX_POINTS) {
-                this.wordPresenter.displayWord("Game won!", "end-game");
+                this.wordDisplayer.displayWord("Game won!", "end-game");
             }
             else if (this.points <= MIN_POINTS) {
-                this.wordPresenter.displayWord("Game lost!", "end-game");
+                this.wordDisplayer.displayWord("Game lost!", "end-game");
             
             }
         }
@@ -150,13 +150,13 @@ class Game {
     addPoints() {
         console.log("Points added");
         this.points++;
-        this.wordPresenter.displayWord(this.points, "score");
+        this.wordDisplayer.displayWord(this.points, "score");
     }
     
     removePoints() {
         console.log("Points removed");
         this.points--;
-        this.wordPresenter.displayWord(this.points, "score");
+        this.wordDisplayer.displayWord(this.points, "score");
     }
     
     compareWords() {
@@ -178,7 +178,7 @@ class Game {
             if (!this.shouldGameStop()) {
                 console.log("shouldGameStop evaluated to false, displaying random word ");
                 this.setCurrentWord(this.wordGenerator.getRandomWord());
-                this.wordPresenter.displayWord(this.getCurrentWord(), "current_word");
+                this.wordDisplayer.displayWord(this.getCurrentWord(), "current_word");
             } else {
                 this.stopGame();
             }
