@@ -61,6 +61,11 @@ class Game {
         this.displayRandomWord("");
         this.displayPoints();
         document.getElementById("end-game").innerHTML = "";
+
+        console.log("Resetting intervals");
+        clearInterval(this.randomWordInterval);
+        clearInterval(this.pointsInterval);
+        clearInterval(this.gameOverInterval);
     }
 
     startGame() {
