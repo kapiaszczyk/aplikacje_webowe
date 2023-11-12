@@ -43,7 +43,6 @@ class Game {
 
         // Intervals
         this.randomWordInterval;
-        this.pointsInterval;
         this.gameOverInterval;
     }
 
@@ -88,7 +87,6 @@ class Game {
 
     clearIntervals() {
         clearInterval(this.randomWordInterval);
-        clearInterval(this.pointsInterval);
         clearInterval(this.gameOverInterval);
     }
 
