@@ -8,6 +8,23 @@ const MAX_POINTS = 3;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
 
+class wordGenerator {
+    
+        constructor() {
+            this.wordList = [  "discount", "roof", "beat", "hostile", "illusion", 
+                                "closed", "heavy", "book", "screw", "diver",
+                                "coin", "navy", "silk", "cow", "evolution"];
+        }
+    
+        getRandomWord() {
+            var index = Math.floor(Math.random() * this.wordList.length);
+            console.log("Random word: " + this.wordList[index]);
+            return this.wordList[index];
+        }
+    
+    
+}
+
 class Game {
 
     // Constructor
@@ -21,6 +38,7 @@ class Game {
         this.currentWord = "";
         this.points = 0;
         this.stopClickedFlag = false;
+        this.wordGenerator = new wordGenerator();
 
         // Intervals
         this.randomWordInterval;
@@ -36,6 +54,7 @@ class Game {
         this.currentWord = "";
         this.points = 0;
         this.stopClickedFlag = false;
+        this.wordGenerator = new wordGenerator();
 
         console.log("Resetting words");
         this.displayGoalWord("");
@@ -50,7 +69,7 @@ class Game {
     
         // get the goal word
         console.log("Getting goal word");
-        this.displayGoalWord(this.getRandomWord());
+        this.displayGoalWord(this.wordGenerator.getRandomWord());
     
         // display score
         console.log("Displaying score");
@@ -105,12 +124,6 @@ class Game {
         }
     }
 
-    getRandomWord() {
-        var index = Math.floor(Math.random() * wordList.length);
-        console.log("Random word: " + wordList[index]);
-        return wordList[index];
-    }
-
     displayRandomWord(word) {
         console.log("Displaying current guess word");
         this.currentWord = word;
@@ -157,7 +170,7 @@ class Game {
     
             if (!this.shouldGameStop()) {
                 console.log("shouldGameStop evaluated to false, displaying random word ");
-                this.displayRandomWord(this.getRandomWord());
+                this.displayRandomWord(this.wordGenerator.getRandomWord());
             } else {
                 this.stopGame();
             }
@@ -165,6 +178,10 @@ class Game {
         }, WORD_INTERVAL);
     }
     
+    
+    
+    
+     
     
     
     setGameOverInterval() {
