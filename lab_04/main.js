@@ -66,11 +66,6 @@ class Game {
         this.wordPresenter = new wordPresenter();
 
         console.log("Resetting words");
-        // this.displayGoalWord("");
-        // this.displayRandomWord("");
-        // this.displayPoints();
-        // document.getElementById("end-game").innerHTML = "";
-
         this.wordPresenter.clearDisplayedWord("goal_word");
         this.wordPresenter.clearDisplayedWord("current_word");
         this.wordPresenter.clearDisplayedWord("score");
@@ -109,7 +104,6 @@ class Game {
     
         // display score
         console.log("Displaying score");
-        // this.displayPoints();
         this.wordPresenter.displayWord(this.points, "score");
 
         this.setRandomWordInterval();
@@ -131,15 +125,12 @@ class Game {
         // else display game over or game won
 
         if (this.stopClickedFlag) {
-            // document.getElementById("end-game").innerHTML = "Game stopped!";
             this.wordPresenter.displayWord("Game stopped!", "end-game");
         } else {
             if (this.points >= MAX_POINTS) {
-                // document.getElementById("end-game").innerHTML = "Game won!";
                 this.wordPresenter.displayWord("Game won!", "end-game");
             }
             else if (this.points <= MIN_POINTS) {
-                // document.getElementById("end-game").innerHTML = "Game lost!";
                 this.wordPresenter.displayWord("Game lost!", "end-game");
             
             }
@@ -168,33 +159,28 @@ class Game {
         console.log("Displaying current guess word");
         this.setCurrentWord(word);
         console.log("Current word: " + this.getCurrentWord());
-        // document.getElementById("current_word").innerHTML = this.currentWord;
         this.wordPresenter.displayWord(this.getCurrentWord(), "current_word");
     } 
     
     displayGoalWord(word) {
         this.wordGoal = word;
-        // document.getElementById("goal_word").innerHTML = this.wordGoal;
         wordPresenter.displayWord(this.wordGoal, "goal_word");
         console.log("Displaying goal word: " + this.wordGoal);
     }
     
     displayPoints() {
-        // document.getElementById("score").innerHTML = this.points;
         this.wordPresenter.displayWord(this.points, "score");
     }
     
     addPoints() {
         console.log("Points added");
         this.points++;
-        // this.displayPoints();
         this.wordPresenter.displayWord(this.points, "score");
     }
     
     removePoints() {
         console.log("Points removed");
         this.points--;
-        // this.displayPoints();
         this.wordPresenter.displayWord(this.points, "score");
     }
     
@@ -216,7 +202,6 @@ class Game {
     
             if (!this.shouldGameStop()) {
                 console.log("shouldGameStop evaluated to false, displaying random word ");
-                // this.displayRandomWord(this.wordGenerator.getRandomWord());
                 this.setCurrentWord(this.wordGenerator.getRandomWord());
                 this.wordPresenter.displayWord(this.getCurrentWord(), "current_word");
             } else {
@@ -231,7 +216,6 @@ class Game {
             if (this.shouldGameStop()) {
                 console.log("Game over");
                 clearInterval(this.randomWordInterval);            
-                // document.getElementById("end-game").innerHTML = "Game over!";
                 this.wordPresenter.displayWord("Game over!", "end-game");
             }
         }, 100);
