@@ -6,7 +6,7 @@ const MAX_POINTS = 5;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
 
-class wordDisplayer {
+class WordDisplayer {
 
     displayWord(word, destinationID) {
         const element = document.getElementById(destinationID);
@@ -24,29 +24,37 @@ class wordDisplayer {
     
 }
 
-class wordGenerator {
-    
-        constructor() {
-            this.wordList = WORD_LIST;
-        }
-    
-        getRandomWord() {
-            var index = Math.floor(Math.random() * this.wordList.length);
-            return this.wordList[index];
-        }
-    
+class WordGenerator {
+
+    constructor(wordList) {
+        this.wordList = wordList;
+    }
+
+    getRandomWord() {
+        const index = Math.floor(Math.random() * this.wordList.length);
+        return this.wordList[index];
+    }
+
 }
 
 class Game {
 
-    constructor() {
+    #worldGoal = "";
+    #wordGuess = "";
+    #currentWord = "";
+    #points = 0;
+    #stopClickedFlag = false;
 
-        // Game variables
-        this.initailizeGame();
+    constructor(wordGenerator, wordDisplayer) {
+
+        this.wordGenerator = wordGenerator;
+        this.wordDisplayer = wordDisplayer;
 
         // Intervals
         this.randomWordInterval;
         this.gameOverInterval;
+
+        this.initailizeGame();
     }
 
     initailizeGame() {
@@ -55,8 +63,6 @@ class Game {
         this.currentWord = "";
         this.points = 0;
         this.stopClickedFlag = false;
-        this.wordGenerator = new wordGenerator();
-        this.wordDisplayer = new wordDisplayer();
     }
 
     resetGame() {
@@ -106,6 +112,8 @@ class Game {
 
     
     stopGame() {
+
+        this.stopClickedFlag = true;
 
         this.clearIntervals();
 
@@ -178,10 +186,11 @@ class Game {
 
 }
 
-let game;
+const wordGenerator = new WordGenerator(WORD_LIST);
+const wordDisplayer = new WordDisplayer();
+const game = new Game(wordGenerator, wordDisplayer);
 
 function startGameHandler() {
-    game = new Game();
     game.startGame();
 }
 
@@ -190,7 +199,6 @@ function catchWordHandler() {
 }
 
 function stopGameHandler() {
-    game.stopClickedFlag = true;
     game.stopGame();
 }
 
