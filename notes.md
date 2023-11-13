@@ -29,3 +29,10 @@
 - :hover - [documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/:hover)
 - decoupling HTML, CSS and JS - [further reading](https://philipwalton.com/articles/decoupling-html-css-and-javascript/)
 - add event listener - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+
+## Laboratoria 06
+- XMLHttpRequest - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+- Fetch API - [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+
+## Laboratoria 07
+- Angular
