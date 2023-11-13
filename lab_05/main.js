@@ -1,48 +1,14 @@
 // Github repo: https://github.com/kapiaszczyk/aplikacje_webowe/tree/main/lab_04
+// Add error handling when reading file or file was not found/uploaded
+// Add error handling when file is empty
 
-const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion", 
-                    "closed", "heavy", "book", "screw", "diver",
-                    "coin", "navy", "silk", "cow", "evolution"];
-
-
+// const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion", 
+//                     "closed", "heavy", "book", "screw", "diver",
+//                     "coin", "navy", "silk", "cow", "evolution"];
 
 const MAX_POINTS = 5;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
-
-class fileReader { 
-
-    // Using fetch API to read file
-    // async fetchFile() {
-    //     const response = await fetch('words.txt');
-    //     const data = await response.text();
-    //     return data;
-    // }
-
-    // Using XMLHttpRequest to read file
-    // ...
-
-    // Fetching the file from fileReader in index.html
-    
-
-
-}
-
-function fetchReadFile(data) {
-    // split to an array
-    const words = data.split("\n");
-    // remove last empty element
-    words.pop();
-    // return the array
-    return words;
-}
-
-// read each word in array and display it
-function displayWords(words) {
-    words.forEach(word => {
-        console.log(word);
-    });
-}
 
 class WordDisplayer {
 
@@ -224,7 +190,10 @@ class Game {
 
 }
 
-const wordGenerator = new WordGenerator(WORD_LIST);
+let wordList;
+
+// TODO: Fix worldGenerator initialization before wordList is created
+const wordGenerator = new WordGenerator(wordList);
 const wordDisplayer = new WordDisplayer();
 const game = new Game(wordGenerator, wordDisplayer);
 
@@ -244,11 +213,24 @@ function resetGameHandler() {
     game.resetGame();
 }
 
-// Using fetch API to read file
-// function fetchFileHandler() {
-//     const fileReader = new fileReader();
-//     fileReader.fetchFile().then(data => {
-//         console.log(data);
-//     });
-// }
+function passWordList(file) {
+
+    let file = input.files[0];  
+    let reader = new FileReader();
+
+    reader.readAsText(file);
+
+    reader.onload = function() {
+        // split to an array
+        const words = reader.result.split("\n");
+        // remove last empty element
+        words.pop();
+        // return the array
+        wordList = words;
+    };
+
+    reader.onerror = function() {
+        console.log(reader.error);
+    };
+}
 

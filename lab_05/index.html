@@ -18,30 +18,7 @@
             document.getElementById("button_start").addEventListener("click", startGameHandler);
             document.getElementById("button_stop").addEventListener("click", stopGameHandler);
             document.getElementById("button_reset").addEventListener("click", resetGameHandler);
-            // document.getElemenyById("button_fetch").addEventListener("click", fetchWordHandler);
         });
-    </script>
-
-    <script>
-
-        // read from local file
-        function readFile(input) {
-            let file = input.files[0];  
-            let reader = new FileReader();
-
-            reader.readAsText(file);
-
-            reader.onload = function() {
-                console.log(reader.result);
-                let localWordList = fetchReadFile(reader.result);
-            };
-
-            reader.onerror = function() {
-                console.log(reader.error);
-            };
-        }
-
-
     </script>
 </head>
 <body>
@@ -69,7 +46,7 @@
                     <input type="file" name="fileToUpload" id="fileToUpload">
                     <input type="submit" value="Upload" name="submit"> -->
 
-                <input type="file" onchange="readFile(this)">
+                <input type="file" onchange="passWordList(this)">
             </div>
 
         </div>
