@@ -1,14 +1,17 @@
 // Github repo: https://github.com/kapiaszczyk/aplikacje_webowe/tree/main/lab_04
-// Add error handling when reading file or file was not found/uploaded
-// Add error handling when file is empty
 
-// const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion", 
-//                     "closed", "heavy", "book", "screw", "diver",
-//                     "coin", "navy", "silk", "cow", "evolution"];
+const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion", 
+                    "closed", "heavy", "book", "screw", "diver",
+                    "coin", "navy", "silk", "cow", "evolution"];
 
 const MAX_POINTS = 5;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
+
+let wordList;
+let wordGenerator;
+let wordDisplayer;
+let game;
 
 class WordDisplayer {
 
@@ -31,7 +34,14 @@ class WordDisplayer {
 class WordGenerator {
 
     constructor(wordList) {
-        this.wordList = wordList;
+
+        if (wordList) {
+            this.wordList = wordList; 
+        } 
+        else {
+            this.wordList = WORD_LIST;
+        }
+
     }
 
     getRandomWord() {
@@ -130,8 +140,10 @@ class Game {
             else if (this.points <= MIN_POINTS) {
                 this.wordDisplayer.displayWord("Game lost!", "end-game");
             
+            } else {
+                this.wordDisplayer.displayWord("Error", "end-game");
             }
-        }
+        } 
         
     }
 
@@ -163,7 +175,7 @@ class Game {
     }
     
     shouldGameStop() {
-        return (this.points >= MAX_POINTS) || (this.points <= MIN_POINTS) || this.stopClickedFlag;
+        return (this.points >= MAX_POINTS) || (this.points <= MIN_POINTS) || this.#stopClickedFlag;
     }
 
     setRandomWordInterval() {
@@ -176,12 +188,13 @@ class Game {
             } else {
                 this.stopGame();
             }
-            
+        
         }, WORD_INTERVAL);
     }
 
     setGameOverInterval() {
-        this.gameOverInterval = setInterval(function() {
+        this.gameOverInterval = setInterval(() => {
+
             if (this.shouldGameStop()) {
                 this.stopGame();
             }
@@ -190,15 +203,11 @@ class Game {
 
 }
 
-let wordList;
-
-// TODO: Fix worldGenerator initialization before wordList is created
-const wordGenerator = new WordGenerator(wordList);
-const wordDisplayer = new WordDisplayer();
-const game = new Game(wordGenerator, wordDisplayer);
-
 function startGameHandler() {
+
+    initailizeGame();
     game.startGame();
+
 }
 
 function catchWordHandler() {
@@ -213,24 +222,35 @@ function resetGameHandler() {
     game.resetGame();
 }
 
-function passWordList(file) {
-
-    let file = input.files[0];  
-    let reader = new FileReader();
-
-    reader.readAsText(file);
-
-    reader.onload = function() {
-        // split to an array
-        const words = reader.result.split("\n");
-        // remove last empty element
-        words.pop();
-        // return the array
-        wordList = words;
-    };
-
-    reader.onerror = function() {
-        console.log(reader.error);
-    };
+function initailizeGame() {
+    wordGenerator = new WordGenerator(wordList);
+    wordDisplayer = new WordDisplayer();
+    game = new Game(wordGenerator, wordDisplayer);
 }
 
+function parseUploadedFile(callback) {
+    const fileInput = document.getElementById('fileToUpload');
+    const file = fileInput.files[0];
+
+    if (file) {
+        console.log("File was selected, using uploaded word list");
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // turn into array wihout empty lines
+            let list = e.target.result.split("\n").filter(word => word !== "");
+            console.log("Logging the words: " + list);
+            callback(list);
+        };
+        reader.readAsText(file);
+    } else {
+        console.log("No file was selected, using default word list");
+        callback(WORD_LIST);
+    }
+
+}
+
+function saveWordList() {
+    parseUploadedFile(function(list) {
+        wordList = list;
+    });
+}
