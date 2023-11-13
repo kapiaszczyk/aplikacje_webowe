@@ -4,9 +4,45 @@ const WORD_LIST = [  "discount", "roof", "beat", "hostile", "illusion",
                     "closed", "heavy", "book", "screw", "diver",
                     "coin", "navy", "silk", "cow", "evolution"];
 
+
+
 const MAX_POINTS = 5;
 const MIN_POINTS = -5;
 const WORD_INTERVAL = 1000;
+
+class fileReader { 
+
+    // Using fetch API to read file
+    // async fetchFile() {
+    //     const response = await fetch('words.txt');
+    //     const data = await response.text();
+    //     return data;
+    // }
+
+    // Using XMLHttpRequest to read file
+    // ...
+
+    // Fetching the file from fileReader in index.html
+    
+
+
+}
+
+function fetchReadFile(data) {
+    // split to an array
+    const words = data.split("\n");
+    // remove last empty element
+    words.pop();
+    // return the array
+    return words;
+}
+
+// read each word in array and display it
+function displayWords(words) {
+    words.forEach(word => {
+        console.log(word);
+    });
+}
 
 class WordDisplayer {
 
@@ -207,3 +243,12 @@ function stopGameHandler() {
 function resetGameHandler() {
     game.resetGame();
 }
+
+// Using fetch API to read file
+// function fetchFileHandler() {
+//     const fileReader = new fileReader();
+//     fileReader.fetchFile().then(data => {
+//         console.log(data);
+//     });
+// }
+
